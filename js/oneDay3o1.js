@@ -11,7 +11,6 @@ function setup() {
 
 function draw() {
   background(220);
-  fill(255, 0, 155); 
   ellipse(position.x, position.y, size, size); 
 
   position.add(velocity); 
@@ -19,9 +18,11 @@ function draw() {
   //If Ball hit left or right edge of canvas then multiply x velocity by -1 (reverse )
   if(position.x < 0 || position.x > width) {
     velocity.x *= -1;
+    fill(random(255),random(255),random(255))
   }
   
   if(position.y < 0 || position.y > height) {
     velocity.y *= -1;
+    fill(random(255),random(255),random(255))
   }
 }
