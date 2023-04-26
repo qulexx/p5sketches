@@ -11,6 +11,7 @@ function setup() {
 
 function draw() {
   background(220);
+  size = mouseX;
   ellipse(position.x, position.y, size, size); 
 
   position.add(velocity); 
