@@ -23,7 +23,7 @@ function setup() {
   button.mousePressed(markovIt);
 }
 
-function markovIt() {
+function markovIt() { //generates a new text using the n-grams and a randomly selected starting index.
     var words = txt.split(/\s+/);
     var startingIndex = floor(random(words.length - order)); // Choose a random starting index
     var currentGram = words.slice(startingIndex, startingIndex + order).join(' ');
