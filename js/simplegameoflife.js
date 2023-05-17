@@ -80,12 +80,16 @@ function countNeighbors(grid, x, y){
 function mouseClicked() {
     let i = Math.floor(mouseX / resolution);
     let j = Math.floor(mouseY / resolution);
-    if (i >= 0 && i < cols - 1 && j >= 0 && j < rows - 1) {
-      // Toggle the states of the 2x2 square
+    if (i >= 0 && i < cols && j >= 0 && j < rows) {
+      // Toggle the clicked cell
       grid[i][j] = 1 - grid[i][j];
-      grid[i + 1][j] = 1 - grid[i + 1][j];
-      grid[i][j + 1] = 1 - grid[i][j + 1];
-      grid[i + 1][j + 1] = 1 - grid[i + 1][j + 1];
+  
+      // Toggle the 2x2 square if within bounds
+      if (i < cols - 1 && j < rows - 1) {
+        grid[i + 1][j] = 1 - grid[i + 1][j];
+        grid[i][j + 1] = 1 - grid[i][j + 1];
+        grid[i + 1][j + 1] = 1 - grid[i + 1][j + 1];
+      }
     }
   }
   
