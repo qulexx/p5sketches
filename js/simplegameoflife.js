@@ -38,7 +38,6 @@ function draw(){
         }
     }
              
-
     let next = make2DArray(cols, rows);
 
     // Compute next based on grid
@@ -56,7 +55,6 @@ function draw(){
         } else {
           next[i][j] = state;
         }
-  
       }
     }
   
