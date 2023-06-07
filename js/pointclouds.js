@@ -1,7 +1,10 @@
+var pos = 0; // Initial position variable
+var zoomLevel = 1; // Initial zoom level
+
 // Use the arrow keys to rotate the point cloud around
 function setup() {
-createCanvas(400, 400);
-points = [-0.0017447,0.11425,0.041273,
+  createCanvas(1000, 1000);
+  points = [-0.0017447,0.11425,0.041273,
 -0.010661,0.11338,0.040916,
 0.026422,0.11499,0.032623,
 0.024545,0.12284,0.024255,
@@ -398,12 +401,12 @@ points = [-0.0017447,0.11425,0.041273,
 -0.069935,0.17983,-0.051988,
 -0.07793,0.17516,-0.0444
 ];
-
-for (i = 0; i < points.length/3; i++){
+  
+  for (i = 0; i < points.length/3; i++){
     points[3*i + 1] = points[3*i + 1] - 0.07
-}
-
-screenPoints = [-0.0017447,0.11425,0.041273,
+  }
+  
+  screenPoints = [-0.0017447,0.11425,0.041273,
 -0.010661,0.11338,0.040916,
 0.026422,0.11499,0.032623,
 0.024545,0.12284,0.024255,
@@ -800,50 +803,56 @@ screenPoints = [-0.0017447,0.11425,0.041273,
 -0.069935,0.17983,-0.051988,
 -0.07793,0.17516,-0.0444
 ]
-
-
+  
+  
 }
 
 function draw() {
-background(220);
-stroke(2)
-if (keyIsDown(UP_ARROW)){
+  background(220);
+  scale(zoomLevel);
+  stroke(2)
+  if (keyIsDown(UP_ARROW)){
     points = rotateThetaX(points, 0.02)
-}
-if (keyIsDown(DOWN_ARROW)){
+  }
+  if (keyIsDown(DOWN_ARROW)){
     points = rotateThetaX(points, -0.02)
-}
-if (keyIsDown(LEFT_ARROW)){
+  }
+  if (keyIsDown(LEFT_ARROW)){
     points = rotateThetaZ(points, -0.02)
-}
-if (keyIsDown(RIGHT_ARROW)){
+  }
+  if (keyIsDown(RIGHT_ARROW)){
     points = rotateThetaZ(points, 0.02)
-}
-for (i = 0; i < points.length/3; i++){
+  }
+  for (i = 0; i < points.length/3; i++){
     screenPoints[3*i + 2] = points[3*i + 2] - 0.7;
     screenPoints[3*i] = 1000*points[3*i]/screenPoints[3*i +2] + 175;
     screenPoints[3*i + 1] = 1000*points[3*i + 1]/screenPoints[3*i +2] + 250;
-}
-for (i = 0; i < points.length/3; i++){
+  }
+  for (i = 0; i < points.length/3; i++){
     circle(screenPoints[3*i], screenPoints[3*i + 1],3) ;
-}
+  }
 }
 
 function rotateThetaX(v, th){
-//  Rotate "th" degrees about the x-axis
-for (i = 0; i < v.length/3; i++){
+  //  Rotate "th" degrees about the x-axis
+  for (i = 0; i < v.length/3; i++){
     v[3*i] = v[3*i];
     v[3*i + 1] = cos(th)*v[3*i + 1] + sin(th)*v[3*i + 2]
     v[3*i + 2] = -sin(th)*v[3*i + 1] + cos(th)*v[3*i + 2]
-}
-return v
+  }
+  return v
 }
 
 function rotateThetaZ(v, th){
-//  Rotate  degrees about the x-axis
-for (i = 0; i < v.length/3; i++){
+  //  Rotate  degrees about the x-axis
+  for (i = 0; i < v.length/3; i++){
     v[3*i] = cos(th)*v[3*i] - sin(th)*v[3*i+2]
     v[3*i + 2] = sin(th)*v[3*i] + cos(th)*v[3*i+2]
+  }
+  return v
 }
-return v
-}
+
+function mouseWheel(event) {
+    // Adjust the zoom level based on the vertical scroll amount
+    zoomLevel += event.delta * 0.001;
+  }
