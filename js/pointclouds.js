@@ -823,12 +823,19 @@ function draw() {
   if (keyIsDown(RIGHT_ARROW)){
     points = rotateThetaZ(points, 0.02)
   }
-  for (i = 0; i < points.length/3; i++){
-    screenPoints[3*i + 2] = points[3*i + 2] - 0.7;
-    screenPoints[3*i] = 1000*points[3*i]/screenPoints[3*i +2] + 175;
-    screenPoints[3*i + 1] = 1000*points[3*i + 1]/screenPoints[3*i +2] + 250;
+  for (i = 0; i < points.length / 3; i++) {
+    screenPoints[3 * i + 2] = points[3 * i + 2] - 0.7;
+    screenPoints[3 * i] = 1000 * points[3 * i] / screenPoints[3 * i + 2] + 175;
+    screenPoints[3 * i + 1] = 1000 * points[3 * i + 1] / screenPoints[3 * i + 2] + 250;
+
   }
   for (i = 0; i < points.length/3; i++){
+    // Generate random color values
+    var r = random(255);
+    var g = random(255);
+    var b = random(255);
+    
+    fill(r, g, b); // Set the fill color
     circle(screenPoints[3*i], screenPoints[3*i + 1],3) ;
   }
 }
